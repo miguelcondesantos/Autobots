@@ -67,33 +67,33 @@ public class AutomanagerApplication {
 			repositorio.save(cliente);
 
 			Cliente cliente2 = new Cliente();
-			cliente2.setNome("Pedro Alcântara de Bragança e Bourbon");
+			cliente2.setNome("Miguel Conde Santos");
 			cliente2.setDataCadastro(Calendar.getInstance().getTime());
 			cliente2.setDataNascimento(calendario.getTime());
-			cliente2.setNomeSocial("Dom Pedro");
+			cliente2.setNomeSocial("Miguel Social");
 
 			Telefone telefone2 = new Telefone();
-			telefone2.setDdd("21");
-			telefone2.setNumero("981234570");
+			telefone2.setDdd("12");
+			telefone2.setNumero("982573856");
 			cliente2.getTelefones().add(telefone2);
 
 			Endereco endereco2 = new Endereco();
-			endereco2.setEstado("Rio de Janeiro");
-			endereco2.setCidade("Rio de Janeiro");
-			endereco2.setBairro("Copacabana");
-			endereco2.setRua("Avenida Atlântica");
-			endereco2.setNumero("1702");
-			endereco2.setCodigoPostal("22021001");
-			endereco2.setInformacoesAdicionais("Hotel Copacabana palace");
+			endereco2.setEstado("São Paulo");
+			endereco2.setCidade("São José dos Campos");
+			endereco2.setBairro("Sei lá");
+			endereco2.setRua("Logo Ali");
+			endereco2.setNumero("123");
+			endereco2.setCodigoPostal("11111111");
+			endereco2.setInformacoesAdicionais("Casinha do Miguel");
 			cliente2.setEndereco(endereco2);
 
 			Documento rg2 = new Documento();
 			rg2.setTipo("RG");
-			rg2.setNumero("1501");
+			rg2.setNumero("9999");
 
 			Documento cpf2 = new Documento();
 			cpf2.setTipo("CPF");
-			cpf2.setNumero("00000000002");
+			cpf2.setNumero("00000000000");
 
 			cliente2.getDocumentos().add(rg2);
 			cliente2.getDocumentos().add(cpf2);
@@ -102,5 +102,4 @@ public class AutomanagerApplication {
 			
 		}
 	}
-
 }

@@ -1,6 +1,6 @@
 package com.autobots.automanager.atualizador;
 
-import java.util.Set;
+import java.util.List;
 
 import com.autobots.automanager.entitades.Servico;
 import com.autobots.automanager.modelos.VerificadorNulo;
@@ -22,7 +22,7 @@ private VerificadorNulo verificador = new VerificadorNulo();
 			}
 		}
 	
-	public void atualizar(Set<Servico> servicos, Set<Servico> atualizacoes) {
+	public void atualizar(List<Servico> servicos, List<Servico> atualizacoes) {
 		for (Servico atualizacao : atualizacoes) {
 			for (Servico servico : servicos) {
 				if (atualizacao.getId() != null) {

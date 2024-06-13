@@ -1,6 +1,6 @@
 package com.autobots.automanager.atualizador;
 
-import java.util.Set;
+import java.util.List;
 
 import com.autobots.automanager.entitades.Documento;
 import com.autobots.automanager.modelos.VerificadorNulo;
@@ -23,7 +23,7 @@ public class AtualizadorDocumento {
 		}
 	}
 
-	public void atualizar(Set<Documento> documentos, Set<Documento> atualizacoes) {
+	public void atualizar(List<Documento> documentos, List<Documento> atualizacoes) {
 		for (Documento atualizacao : atualizacoes) {
 			for (Documento documento : documentos) {
 				if (atualizacao.getId() != null) {

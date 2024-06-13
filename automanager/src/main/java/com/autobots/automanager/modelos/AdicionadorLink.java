@@ -3,6 +3,11 @@ package com.autobots.automanager.modelos;
 import java.util.List;
 
 public interface AdicionadorLink<T> {
-    void adicionarLink(List<T> lista);
+    default void adicionarLink(List<T> lista) {
+        for (T objeto : lista) {
+            adicionarLink(objeto);
+        }
+    }
+    
     void adicionarLink(T objeto);
 }

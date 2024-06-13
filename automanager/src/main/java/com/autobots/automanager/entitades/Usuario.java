@@ -1,7 +1,7 @@
 package com.autobots.automanager.entitades;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,6 +11,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -37,107 +40,137 @@ public class Usuario extends RepresentationModel<Usuario> {
     private String nomeSocial;
     
     @ElementCollection(fetch = FetchType.EAGER)
-    private Set<PerfilUsuario> perfis = new HashSet<>();
+    private List<PerfilUsuario> perfis = new ArrayList<>();
     
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Telefone> telefones = new HashSet<>();
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Telefone> telefones = new ArrayList<>();
     
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Endereco endereco;
     
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Documento> documentos = new HashSet<>();
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id")
+    private List<Documento> documentos = new ArrayList<>();
     
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Email> emails = new HashSet<>();
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Email> emails = new ArrayList<>();
     
-    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Credencial> credenciais = new HashSet<>();
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Credencial> credenciais = new ArrayList<>();
     
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    private Set<Mercadoria> mercadorias = new HashSet<>();
+    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinTable(
+        name = "usuario_mercadorias",
+        joinColumns = @JoinColumn(name = "usuario_id"),
+        inverseJoinColumns = @JoinColumn(name = "mercadoria_id")
+    )
+    private List<Mercadoria> mercadorias = new ArrayList<>();
     
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH })
-    private Set<Venda> vendas = new HashSet<>();
+    private List<Venda> vendas = new ArrayList<>();
     
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH })
-    private Set<Veiculo> veiculos = new HashSet<>();
-    
+    private List<Veiculo> veiculos = new ArrayList<>();
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public String getNomeSocial() {
 		return nomeSocial;
 	}
+
 	public void setNomeSocial(String nomeSocial) {
 		this.nomeSocial = nomeSocial;
 	}
-	public Set<PerfilUsuario> getPerfis() {
+
+	public List<PerfilUsuario> getPerfis() {
 		return perfis;
 	}
-	public void setPerfis(Set<PerfilUsuario> perfis) {
+
+	public void setPerfis(List<PerfilUsuario> perfis) {
 		this.perfis = perfis;
 	}
-	public Set<Telefone> getTelefones() {
+
+	public List<Telefone> getTelefones() {
 		return telefones;
 	}
-	public void setTelefones(Set<Telefone> telefones) {
+
+	public void setTelefones(List<Telefone> telefones) {
 		this.telefones = telefones;
 	}
+
 	public Endereco getEndereco() {
 		return endereco;
 	}
+
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-	public Set<Documento> getDocumentos() {
+
+	public List<Documento> getDocumentos() {
 		return documentos;
 	}
-	public void setDocumentos(Set<Documento> documentos) {
+
+	public void setDocumentos(List<Documento> documentos) {
 		this.documentos = documentos;
 	}
-	public Set<Email> getEmails() {
+
+	public List<Email> getEmails() {
 		return emails;
 	}
-	public void setEmails(Set<Email> emails) {
+
+	public void setEmails(List<Email> emails) {
 		this.emails = emails;
 	}
-	public Set<Credencial> getCredenciais() {
+
+	public List<Credencial> getCredenciais() {
 		return credenciais;
 	}
-	public void setCredenciais(Set<Credencial> credenciais) {
+
+	public void setCredenciais(List<Credencial> credenciais) {
 		this.credenciais = credenciais;
 	}
-	public Set<Mercadoria> getMercadorias() {
+
+	public List<Mercadoria> getMercadorias() {
 		return mercadorias;
 	}
-	public void setMercadorias(Set<Mercadoria> mercadorias) {
+
+	public void setMercadorias(List<Mercadoria> mercadorias) {
 		this.mercadorias = mercadorias;
 	}
-	public Set<Venda> getVendas() {
+
+	public List<Venda> getVendas() {
 		return vendas;
 	}
-	public void setVendas(Set<Venda> vendas) {
+
+	public void setVendas(List<Venda> vendas) {
 		this.vendas = vendas;
 	}
-	public Set<Veiculo> getVeiculos() {
+
+	public List<Veiculo> getVeiculos() {
 		return veiculos;
 	}
-	public void setVeiculos(Set<Veiculo> veiculos) {
+
+	public void setVeiculos(List<Veiculo> veiculos) {
 		this.veiculos = veiculos;
-	}
+	}  
+	
 	
 	
 }

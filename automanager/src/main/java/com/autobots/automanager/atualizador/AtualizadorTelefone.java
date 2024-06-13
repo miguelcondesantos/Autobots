@@ -1,6 +1,6 @@
 package com.autobots.automanager.atualizador;
 
-import java.util.Set;
+import java.util.List;
 
 import com.autobots.automanager.entitades.Telefone;
 import com.autobots.automanager.modelos.VerificadorNulo;
@@ -20,7 +20,7 @@ public class AtualizadorTelefone {
 			}
 		}
 	
-	public void atualizar(Set<Telefone> telefones, Set<Telefone> atualizacoes) {
+	public void atualizar(List<Telefone> telefones, List<Telefone> atualizacoes) {
 		for (Telefone atualizacao : atualizacoes) {
 			for (Telefone telefone : telefones) {
 				if (atualizacao.getId() != null) {

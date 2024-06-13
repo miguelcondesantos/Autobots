@@ -1,11 +1,14 @@
 package com.autobots.automanager.atualizador;
 
 
-import java.util.Set;
+import java.util.List;
+
+import org.springframework.stereotype.Component;
 
 import com.autobots.automanager.entitades.Email;
 import com.autobots.automanager.modelos.VerificadorNulo;
 
+@Component
 public class AtualizadorEmail {
 	
 	private VerificadorNulo verificador = new VerificadorNulo();
@@ -18,7 +21,7 @@ public class AtualizadorEmail {
 			}
 		}
 	
-	public void atualizar(Set<Email> emails, Set<Email> atualizacoes) {
+	public void atualizar(List<Email> emails, List<Email> atualizacoes) {
 		for (Email atualizacao : atualizacoes) {
 			for (Email email : emails) {
 				if (atualizacao.getId() != null) {

@@ -1,10 +1,13 @@
 package com.autobots.automanager.atualizador;
 
-import java.util.Set;
+import java.util.List;
+
+import org.springframework.stereotype.Component;
 
 import com.autobots.automanager.entitades.Veiculo;
 import com.autobots.automanager.modelos.VerificadorNulo;
 
+@Component
 public class AtualizadorVeiculo {
 	
 	private VerificadorNulo verificador = new VerificadorNulo();
@@ -28,7 +31,7 @@ public class AtualizadorVeiculo {
 	
 
 	
-	public void atualizar(Set<Veiculo> veiculos, Set<Veiculo> atualizacoes) {
+	public void atualizar(List<Veiculo> veiculos, List<Veiculo> atualizacoes) {
 		for (Veiculo atualizacao : atualizacoes) {
 			for (Veiculo email : veiculos) {
 				if (atualizacao.getId() != null) {

@@ -1,5 +1,6 @@
 package com.autobots.automanager.controles;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,7 @@ public class ClienteControle {
 
 	@PostMapping("/cadastro")
 	public void cadastrarCliente(@RequestBody Cliente cliente) {
+		cliente.setDataCadastro(new Date());
 		repositorio.save(cliente);
 	}
 

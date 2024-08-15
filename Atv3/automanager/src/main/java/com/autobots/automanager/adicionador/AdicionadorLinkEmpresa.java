@@ -1,0 +1,39 @@
+package com.autobots.automanager.adicionador;
+
+import java.util.List;
+
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+import org.springframework.stereotype.Component;
+
+import com.autobots.automanager.controles.EmpresaControle;
+import com.autobots.automanager.entitades.Empresa;
+import com.autobots.automanager.modelos.AdicionadorLink;
+
+@Component
+public class AdicionadorLinkEmpresa implements AdicionadorLink<Empresa>{
+	
+	@Override
+	public void adicionarLink(List<Empresa> lista) {
+		for (Empresa empresa : lista) {
+			long id = empresa.getId();
+			Link linkProprio = WebMvcLinkBuilder
+					.linkTo(WebMvcLinkBuilder
+							.methodOn(EmpresaControle.class)
+							.obterEmpresa(id))
+					.withSelfRel();
+			empresa.add(linkProprio);
+		}
+	}
+	
+	@Override
+	public void adicionarLink(Empresa objeto) {
+		long id = objeto.getId();
+		Link linkProprio = WebMvcLinkBuilder
+				.linkTo(WebMvcLinkBuilder
+						.methodOn(EmpresaControle.class)
+						.obterEmpresas())
+				.withSelfRel();
+		objeto.add(linkProprio);
+	}
+}
